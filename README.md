@@ -8,7 +8,8 @@ Checkout System: Design a checkout system that is able to scan through items in 
 |        B      |       6       |                3                |       12       |
 |        C      |       7       |                0                |        0       |
 
-Example : {A, A, B, C, B, B, A} <br />
+Input : {A, A, B, C, B, B, A} <br />
+Output:<br/>
 Total price:  5<br />
 Total price:  8<br />
 Total price: 14<br />
