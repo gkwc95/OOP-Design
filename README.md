@@ -9,11 +9,4 @@ Checkout System: Design a checkout system that is able to scan through items in 
 |        C      |       7       |                0                |        0       |
 
 Input : {A, A, B, C, B, B, A} <br />
-Output:<br/>
-Total price:  5<br />
-Total price:  8<br />
-Total price: 14<br />
-Total price: 21<br />
-Total price: 27<br />
-Total price: 27<br />
-Total price: 32<br />
+Output: 5, 8, 14, 21, 27, 27, 32
