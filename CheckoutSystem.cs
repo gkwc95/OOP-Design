@@ -3,6 +3,19 @@ using System.Collections.Generic;
 
 namespace oop
 {
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            IProduct[] cart = new IProduct[] { new A(), new B(), new C(), new C(), new B(), new B(), new A() }; //Items in the cart.
+            CheckoutSystem checkoutSystem = new CheckoutSystem();
+            foreach (IProduct product in cart)
+            {
+                checkoutSystem.TotalPrice(product);
+            }
+        }
+    }
+    
     public class CheckoutSystem
     {
         private int totalPrice;
@@ -22,7 +35,7 @@ namespace oop
             totalPrice = 0;
             foreach (var item in cart)
                 totalPrice += item.Key.getPrice(item.Value);
-            Console.WriteLine(totalPrice);
+            Console.WriteLine($"Total Price: {totalPrice}"); //Printing out the price
         }
     }
 
@@ -41,13 +54,28 @@ namespace oop
             this.price = price;
             this.discount = discount;
         }
+        
         public int getPrice(int amount)
         {
-            int priceInTotal = 0;
+             int priceInTotal;
             if (discount.AmountToGetDiscount() != 0)
-                priceInTotal = (discount.DiscountPrice() * (amount / discount.AmountToGetDiscount()));
-            priceInTotal += amount % discount.AmountToGetDiscount() *price;
+                priceInTotal = (discount.DiscountPrice() * (amount / discount.AmountToGetDiscount()))+ price * (amount % discount.AmountToGetDiscount());
+            else 
+                priceInTotal = amount *price;
             return priceInTotal;
+        }
+        
+        public override bool Equals(Object obj)
+        {
+            return this.GetType().Equals(obj.GetType());
+        }
+
+        public override int GetHashCode()
+        {
+            String name = this.GetType().Name.ToString();
+            int value = 0;
+            foreach (char letter in name) value += letter;
+            return price + value; 
         }
     }
 
@@ -106,19 +134,5 @@ namespace oop
     public class DiscountC : Discount
     {
         public DiscountC() : base(0, 0) { }
-    }
-
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            IProduct[] cart = new IProduct[] { new A(), new B(), new C() };
-            CheckoutSystem checkoutSystem = new CheckoutSystem();
-            foreach (IProduct product in cart)
-            {
-                checkoutSystem.TotalPrice(product);
-            }
-
-        }
     }
 }
