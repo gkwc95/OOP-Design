@@ -5,7 +5,6 @@ namespace oop
 {
     public class CheckoutSystem
     {
-
         private int totalPrice;
         private Dictionary<IProduct, int> cart;
 
@@ -44,9 +43,11 @@ namespace oop
         }
         public int getPrice(int amount)
         {
+            int priceInTotal = 0;
             if (discount.AmountToGetDiscount() != 0)
-                price = (discount.DiscountPrice() * (amount / discount.AmountToGetDiscount())) + ((amount % discount.AmountToGetDiscount()) * price);
-            return price;
+                priceInTotal = (discount.DiscountPrice() * (amount / discount.AmountToGetDiscount()));
+            priceInTotal += amount % discount.AmountToGetDiscount() *price;
+            return priceInTotal;
         }
     }
 
